@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+    <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
+  
+    <include file="$(find hector_slam_launch)/launch/tutorial.launch"/>
+
+    
+    <include file="$(find hector_exploration_node)/launch/exploration_planner.launch"/>
+
+
+
+</launch>
