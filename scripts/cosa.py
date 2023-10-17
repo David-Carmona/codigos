@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from nav_msgs.msg import OccupancyGrid
 from geometry_msgs.msg import PointStamped
-
+import time
 
 last_msg = 0
-last_point = [0, 0]
+last_point = [0, 0] 
 init_point = [0, 0]
 
 x_0= 0
@@ -92,6 +92,7 @@ if __name__ == '__main__':
 
     #print(res)
 
+    start = time.time( )
     for f in range(50000):
         traveled_points.add(tuple(init_point_mat))
         found_points.remove(tuple(init_point_mat))
@@ -102,7 +103,7 @@ if __name__ == '__main__':
 
         last_found = init_point_mat
 
-        search_step_size = 2
+        search_step_size = 4
 
         vecinos = [
             [init_point_mat[0]+search_step_size, init_point_mat[1]],
@@ -150,8 +151,8 @@ if __name__ == '__main__':
 
             hijos_padres[tuple(min_curr_point)] = tuple(init_point_mat)
             init_point_mat = min_curr_point
-    
 
+    print(time.time() - start)
 
     current_pos=tuple(last_found)
     puntos_a_seguir=[]
@@ -162,13 +163,10 @@ if __name__ == '__main__':
     puntos_a_seguir = puntos_a_seguir[::-1]
 
     size = 1
-    t = 0
     for i in puntos_a_seguir:
         for x in range(-size, size):
             for y in range(-size, size):
-                res[i[1] + x][i[0] + y] = t
-                t += 1
-    
+                res[i[1] + x][i[0] + y] = 80
 
     print(puntos_a_seguir[::-1])
 
